@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management Portal | ELROI CARE TRUST</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .admin-tab-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 10px 18px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .admin-tab-btn.active, .admin-tab-btn:hover {
+      background: var(--royal-blue);
+      color: #ffffff;
+      border-color: var(--royal-blue);
+    }
+    .admin-tab-pane {
+      display: none;
+    }
+    .admin-tab-pane.active {
+      display: block;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    .data-table th, .data-table td {
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+    }
+    .data-table th {
+      background: #f8fafc;
+      color: #0b2545;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body style="background: #f8fafc; min-height: 100vh;">
+
+  <!-- Admin Header -->
+  <header style="background: var(--primary-navy); color: #fff; padding: 15px 0; border-bottom: 3px solid var(--accent-gold);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="display: flex; align-items: center; gap: 12px;">
+        <img src="/logo.jpg" alt="EL ROI CARE TRUST Logo" class="trust-logo-img" style="width: 44px; height: 44px;">
+        <div>
+          <h1 style="color: #fff; font-size: 1.15rem; margin: 0;">ELROI CARE TRUST</h1>
+          <span style="color: var(--accent-gold-light); font-size: 0.75rem; letter-spacing: 1px;">ADMINISTRATION PORTAL</span>
+        </div>
+      </a>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <a href="/" class="btn btn-outline-white btn-sm"><i class="fas fa-globe"></i> View Website</a>
+        <button id="adminLogoutBtn" class="btn btn-sm btn-gold" style="display: none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <div class="container" id="adminLoginSection" style="max-width: 480px; margin: 80px auto;">
+    <div class="form-card" style="box-shadow: var(--shadow-xl); border-top: 5px solid var(--royal-blue);">
+      <div style="text-align: center; margin-bottom: 25px;">
+        <div class="trust-crest-icon" style="margin: 0 auto 12px; width: 60px; height: 60px; font-size: 26px;">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <h2 style="font-size: 1.5rem; color: var(--primary-navy);">Trust Admin Login</h2>
+        <p style="font-size: 0.88rem; color: #64748b;">Authorized Access for Founder & Trustees</p>
+      </div>
+
+      <div id="loginError" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px; border-radius: 6px; font-size: 0.88rem; margin-bottom: 18px; text-align: center;"></div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="adminUser">Admin Username</label>
+          <input type="text" id="adminUser" class="form-control" placeholder="Enter username" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="adminPass">Password</label>
+          <input type="password" id="adminPass" class="form-control" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;">
+          <i class="fas fa-lock-open"></i> Login to Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Authenticated Dashboard Section -->
+  <div class="container" id="adminDashboardSection" style="display: none; padding: 40px 20px;">
+    <!-- Welcome Greeting Bar -->
+    <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 25px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; box-shadow: var(--shadow-sm);">
+      <div>
+        <h2 style="font-size: 1.5rem; color: var(--royal-blue); margin-bottom: 4px;">
+          Welcome, P.K. Immanuel Neas Kumar
+        </h2>
+        <p style="color: #64748b; font-size: 0.9rem;">
+          Founder & Managing Trustee | ELROI CARE TRUST (www.elroicaretrust.in)
+        </p>
+      </div>
+      <div>
+        <span class="tag-badge" style="background:#dcfce7; color:#15803d; border-color:#86efac; font-size:0.85rem; padding:6px 14px;">
+          <i class="fas fa-shield-check"></i> System Active & Secure
+        </span>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px;">
+      <button type="button" class="admin-tab-btn active" data-target="tabUpload">
+        <i class="fas fa-camera"></i> Upload New Photos
+      </button>
+      <button type="button" class="admin-tab-btn" data-target="tabGallery">
+        <i class="fas fa-trash-alt"></i> Manage & Delete Photos
+      </button>
+      <button type="button" class="admin-tab-btn" data-target="tabDonations">
+        <i class="fas fa-receipt"></i> Donations & 80G Receipts
+      </button>
+      <button type="button" class="admin-tab-btn" data-target="tabEnquiries">
+        <i class="fas fa-envelope-open-text"></i> Enquiries & Messages
+      </button>
+      <button type="button" class="admin-tab-btn" data-target="tabVercel">
+        <i class="fas fa-cloud"></i> Vercel Cloud & Storage
+      </button>
+      <button type="button" class="admin-tab-btn" data-target="tabGoDaddy">
+        <i class="fas fa-server"></i> Domain & Hosting Setup
+      </button>
+    </div>
+
+    <!-- TAB 1: UPLOAD PHOTOS -->
+    <div class="admin-tab-pane active" id="tabUpload">
+      <div class="form-card" style="max-width: 800px;">
+        <div style="margin-bottom: 22px;">
+          <h3 style="color: var(--royal-blue); font-size: 1.35rem; margin: 0 0 6px;">
+            <i class="fas fa-cloud-upload-alt" style="color: var(--accent-gold);"></i> Upload Photographs to Website Gallery
+          </h3>
+          <p style="color: #64748b; font-size: 0.9rem; margin: 0;">
+            Easily add new photos of grocery distributions, blind assistance, children camps, and community field visits.
+          </p>
+        </div>
+
+        <form id="photoUploadForm">
+          <div class="form-group">
+            <label class="form-label" for="photoFile">Select Photo (JPEG, JPG, PNG, WEBP) *</label>
+            <input type="file" id="photoFile" class="form-control" accept="image/*" required>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img id="uploadPreview" src="" alt="Photo Preview" style="max-height: 240px; border-radius: 8px; border: 1px solid #cbd5e1; display: none; margin: 0 auto;">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="photoTitle">Photo Title / Activity Name *</label>
+              <input type="text" id="photoTitle" class="form-control" placeholder="e.g. Monthly Rice Provision to Elderly Widows" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="photoCategory">Gallery Album / Category *</label>
+              <select id="photoCategory" class="form-control">
+                <option value="groceries">Monthly Provisions & Groceries</option>
+                <option value="blind_disabled">Blind & Differently Abled Support</option>
+                <option value="children">Children Welfare & Camps</option>
+                <option value="widows_seniors">Widows & Elderly Care</option>
+                <option value="tribal">Tribal & Nomadic Hamlets</option>
+                <option value="community" selected>General Community Charity</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="photoDate">Date of Service</label>
+              <input type="date" id="photoDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="photoDesc">Short Description / Location</label>
+              <input type="text" id="photoDesc" class="form-control" placeholder="e.g. Distributed in Uthukottai rural area">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold" style="width: 100%; padding: 14px; font-size: 1rem;">
+            <i class="fas fa-upload"></i> Upload & Publish to Gallery
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 2: DONATIONS & RECEIPTS -->
+    <div class="admin-tab-pane" id="tabDonations">
+      <div class="form-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <div>
+            <h3 style="color: var(--royal-blue); font-size: 1.3rem;">Recorded Donations & 80G Receipts</h3>
+            <p style="color: #64748b; font-size: 0.88rem;">Official records for Form 10BD income tax filing and donor compliance.</p>
+          </div>
+          <a href="/donate.html#receiptForm" target="_blank" class="btn btn-sm btn-outline"><i class="fas fa-plus"></i> New Receipt Entry</a>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Receipt ID</th>
+                <th>Date</th>
+                <th>Donor Name & PAN</th>
+                <th>Amount</th>
+                <th>Payment Mode / UTR</th>
+                <th>Purpose</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminDonationsList">
+              <tr><td colspan="7" style="text-align:center; padding: 20px;">Loading donation records...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: ENQUIRIES & MESSAGES -->
+    <div class="admin-tab-pane" id="tabEnquiries">
+      <div class="form-card">
+        <h3 style="color: var(--royal-blue); font-size: 1.3rem; margin-bottom: 6px;">Enquiries & Messages Inbox</h3>
+        <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 20px;">Messages submitted through the public website contact form.</p>
+
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Sender</th>
+                <th>Contact Phone & Email</th>
+                <th>Subject & Message</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminEnquiriesList">
+              <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading messages...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: MANAGE & DELETE GALLERY PHOTOS -->
+    <div class="admin-tab-pane" id="tabGallery">
+      <div class="form-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+          <div>
+            <h3 style="color: var(--royal-blue); font-size: 1.35rem; margin: 0 0 4px;">
+              <i class="fas fa-images" style="color: var(--accent-gold);"></i> Manage Website Photographs
+            </h3>
+            <p style="color: #64748b; font-size: 0.9rem; margin: 0;">
+              Click the red <strong>"Delete"</strong> button on any photo to remove it immediately from the public website gallery.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span id="adminGalleryCountBadge" class="tag-badge" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd; font-weight:700; font-size:0.85rem; padding: 6px 14px;">
+              Loading photos...
+            </span>
+            <button type="button" id="refreshAdminGalleryBtn" class="btn btn-sm btn-outline">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <div id="adminGalleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px;">
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b;">Loading photos...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: VERCEL CLOUD STORAGE & HOSTING -->
+    <div class="admin-tab-pane" id="tabVercel">
+      <div class="form-card" style="max-width: 900px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+          <div>
+            <h3 style="color: var(--royal-blue); font-size: 1.35rem; margin: 0 0 4px;">
+              <i class="fas fa-cloud" style="color: var(--accent-gold);"></i> Vercel Cloud Storage & Hosting Integration
+            </h3>
+            <p style="color: #64748b; font-size: 0.9rem; margin: 0;">
+              Store all website photographs in Vercel Blob permanent cloud storage with free worldwide CDN delivery.
+            </p>
+          </div>
+          <span id="tabVercelStatusBadge" class="tag-badge" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0; font-size:0.85rem; padding: 6px 14px;">
+            <i class="fas fa-check-circle"></i> Local Ready (Vercel Compatible)
+          </span>
+        </div>
+
+        <!-- Vercel Storage Connection Box -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 30px;">
+          <h4 style="color: var(--primary-navy); margin-bottom: 8px; font-size: 1.1rem;">
+            <i class="fas fa-key" style="color: var(--royal-blue);"></i> Vercel Blob Read/Write Token Configuration
+          </h4>
+          <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 18px; line-height: 1.6;">
+            When you deploy ELROI CARE TRUST to Vercel, Vercel Blob provides a permanent cloud storage URL for every uploaded photo. If you already have a token from Vercel, paste it below to enable cloud storage immediately:
+          </p>
+
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label class="form-label" for="vercelBlobTokenInput" style="font-weight: 700; color: #334155;">
+              BLOB_READ_WRITE_TOKEN (from Vercel Dashboard)
+            </label>
+            <div style="display: flex; gap: 10px;">
+              <input type="password" id="vercelBlobTokenInput" class="form-control" placeholder="vercel_blob_rw_..." style="font-family: monospace;">
+              <button type="button" id="toggleTokenVisibilityBtn" class="btn btn-outline" style="padding: 0 14px;" title="Show/Hide Token">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <small style="color: #64748b; font-size: 0.8rem; margin-top: 5px; display: block;">
+              Found in: Vercel Dashboard &gt; Your Project &gt; Storage &gt; Blob Store &gt; Quickstart (.env.local)
+            </small>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="button" id="saveVercelTokenBtn" class="btn btn-primary btn-sm">
+              <i class="fas fa-save"></i> Save Storage Token
+            </button>
+            <button type="button" id="testVercelConnectionBtn" class="btn btn-outline btn-sm">
+              <i class="fas fa-vial"></i> Test Vercel Connection
+            </button>
+          </div>
+          <div id="vercelTestResult" style="margin-top: 15px; font-size: 0.88rem; display: none;"></div>
+        </div>
+
+        <!-- Code Implementation Display -->
+        <div style="background: #0f172a; color: #e2e8f0; border-radius: 10px; padding: 18px 20px; margin-bottom: 25px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 0.82rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">
+              <i class="fab fa-node-js" style="color: #68a063;"></i> Active Blob Storage Implementation
+            </span>
+            <span class="tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); font-size: 0.72rem;">@vercel/blob</span>
+          </div>
+          <pre style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.88rem; line-height: 1.6; color: #e2e8f0; overflow-x: auto;"><code><span style="color: #f43f5e;">import</span> { put } <span style="color: #f43f5e;">from</span> <span style="color: #a3e635;">"@vercel/blob"</span>;
+
+<span style="color: #94a3b8;">// Admin portal uploads store photos directly via @vercel/blob:</span>
+<span style="color: #38bdf8;">const</span> blob = <span style="color: #f43f5e;">await</span> put(<span style="color: #a3e635;">`gallery/${filename}`</span>, imageBuffer, {
+  access: <span style="color: #a3e635;">'public'</span>, <span style="color: #94a3b8;">// Direct CDN URL for website gallery (or 'private')</span>
+  token: process.env.BLOB_READ_WRITE_TOKEN
+});
+
+<span style="color: #94a3b8;">// Photo is published immediately with permanent CDN URL:</span>
+<span style="color: #38bdf8;">console</span>.log(blob.url); <span style="color: #94a3b8;">// https://*.public.blob.vercel-storage.com/...</span></code></pre>
+        </div>
+
+        <!-- 3-Step Vercel Setup Guide -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: var(--shadow-sm);">
+          <h4 style="color: var(--royal-blue); margin-bottom: 15px; font-size: 1.15rem;">
+            <i class="fas fa-rocket" style="color: var(--accent-gold);"></i> How to Deploy Website to Vercel & Store Photos
+          </h4>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; gap: 15px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--royal-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+              <div>
+                <h5 style="color: var(--primary-navy); margin: 0 0 4px; font-size: 1rem;">Deploy Website to Vercel (Free)</h5>
+                <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">
+                  Go to <a href="https://vercel.com" target="_blank" style="color: var(--royal-blue); font-weight: 700;">vercel.com</a>, import this project folder or GitHub repository. Vercel automatically detects <code>vercel.json</code> and builds the site with zero extra configuration.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--royal-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+              <div>
+                <h5 style="color: var(--primary-navy); margin: 0 0 4px; font-size: 1rem;">Enable Vercel Blob Storage</h5>
+                <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">
+                  In your Vercel Project Dashboard, click the <strong>Storage</strong> tab &gt; click <strong>Create Database</strong> &gt; select <strong>Blob</strong> &gt; click <strong>Continue & Connect</strong>. Vercel will automatically provide a global cloud storage bucket!
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--royal-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+              <div>
+                <h5 style="color: var(--primary-navy); margin: 0 0 4px; font-size: 1rem;">Permanent Cloud Photo CDN</h5>
+                <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">
+                  From that moment on, whenever anyone clicks <strong>"Upload Photo"</strong> from a smartphone or desktop, the photo is stored permanently on Vercel's global CDN, loads at lightning speed worldwide, and never gets lost!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connect Domain on Vercel -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px;">
+          <h4 style="color: var(--primary-navy); margin-bottom: 8px; font-size: 1.05rem;">
+            <i class="fas fa-globe" style="color: var(--royal-blue);"></i> Connecting www.elroicaretrust.in on Vercel
+          </h4>
+          <p style="font-size: 0.88rem; color: #475569; line-height: 1.6; margin: 0;">
+            In Vercel <strong>Settings &gt; Domains</strong>, enter <code>www.elroicaretrust.in</code> and <code>elroicaretrust.in</code>. Vercel gives you 1 CNAME record to paste in GoDaddy, and issues free automatic SSL/HTTPS certificates that renew automatically forever!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: GODADDY DOMAIN & HOSTING GUIDE -->
+    <div class="admin-tab-pane" id="tabGoDaddy">
+      <div class="form-card" style="max-width: 900px;">
+        <h3 style="color: var(--royal-blue); font-size: 1.35rem; margin-bottom: 12px;">
+          <i class="fas fa-network-wired" style="color: var(--accent-gold);"></i> Connecting GoDaddy Domain: www.elroicaretrust.in
+        </h3>
+        <p style="color: #475569; font-size: 0.95rem; line-height: 1.7; margin-bottom: 25px;">
+          Follow these exact steps to connect your registered domain from GoDaddy to your website host and enable free SSL (HTTPS):
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+          <h4 style="color: var(--primary-navy); margin-bottom: 10px;">Step 1: GoDaddy DNS Configuration</h4>
+          <ol style="padding-left: 20px; font-size: 0.92rem; color: #475569; line-height: 1.8;">
+            <li>Log in to your <strong>GoDaddy Account</strong>.</li>
+            <li>Go to <strong>My Products</strong> &gt; click <strong>DNS</strong> next to <code>elroicaretrust.in</code>.</li>
+            <li>In the <strong>DNS Records</strong> table, add or edit the following two records:
+              <ul style="margin: 8px 0; font-family: monospace; font-size: 0.88rem; background: #fff; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                <li><strong>Type:</strong> A | <strong>Name:</strong> @ | <strong>Value:</strong> [Your Server IP Address] | <strong>TTL:</strong> 1/2 Hour</li>
+                <li><strong>Type:</strong> CNAME | <strong>Name:</strong> www | <strong>Value:</strong> [Your Host CNAME or elroicaretrust.in] | <strong>TTL:</strong> 1/2 Hour</li>
+              </ul>
+            </li>
+            <li>Click <strong>Save</strong>. DNS updates usually reflect within 15 to 30 minutes!</li>
+          </ol>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 25px;">
+          <h4 style="color: var(--primary-navy); margin-bottom: 10px;">Step 2: Google Search Console Verification</h4>
+          <ol style="padding-left: 20px; font-size: 0.92rem; color: #475569; line-height: 1.8;">
+            <li>Open <a href="https://search.google.com/search-console" target="_blank" style="color: var(--royal-blue); font-weight:700;">Google Search Console</a>.</li>
+            <li>Add property <code>elroicaretrust.in</code> (Domain verification).</li>
+            <li>Google will provide a <strong>TXT verification record</strong> (e.g. <code>google-site-verification=...</code>).</li>
+            <li>In GoDaddy DNS settings, click <strong>Add New Record</strong> &gt; Type: <strong>TXT</strong> &gt; Name: <code>@</code> &gt; Value: paste the code &gt; Save.</li>
+            <li>Click <strong>Verify</strong> in Google Search Console! Your trust website is now officially verified and indexed on Google.</li>
+          </ol>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px;">
+          <h4 style="color: var(--primary-navy); margin-bottom: 10px;">Step 3: Free Professional Email (contact@elroicaretrust.in)</h4>
+          <p style="font-size: 0.92rem; color: #475569; line-height: 1.7;">
+            You can get free official business email accounts (e.g. <code>contact@elroicaretrust.in</code>) using <strong>Zoho Mail Forever Free Plan</strong> (up to 5 free email accounts with your GoDaddy domain) by simply adding Zoho's MX records to your GoDaddy DNS!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    // Set today's date in upload date input
+    const photoDateInput = document.getElementById('photoDate');
+    if (photoDateInput) photoDateInput.value = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
+

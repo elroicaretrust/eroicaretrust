@@ -1,0 +1,22 @@
+{
+  "name": "elroi-care-trust",
+  "version": "1.0.0",
+  "description": "Official Website and Management Portal for ELROI CARE TRUST",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "node -e \"console.log('Build ready')\"",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ngo",
+    "charity",
+    "trust",
+    "elroi-care-trust"
+  ],
+  "author": "ELROI CARE TRUST",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
+  }
+}

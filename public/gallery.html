@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery | ELROI CARE TRUST | Field Activities & Service</title>
+  <meta name="description" content="Explore photos of ELROI CARE TRUST charity activities: grocery provision distributions, blind assistance, children welfare camps, and tribal relief.">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="tag-badge"><i class="fas fa-certificate"></i> 80G TAX EXEMPTION AVAILABLE</span>
+        <a href="tel:7904947631"><i class="fas fa-phone-alt"></i> +91 7904947631</a>
+        <a href="mailto:contact@elroicaretrust.in"><i class="fas fa-envelope"></i> contact@elroicaretrust.in</a>
+      </div>
+      <div class="top-bar-right">
+        <span><i class="fas fa-map-marker-alt"></i> Tiruvallur, Tamil Nadu</span>
+        <a href="/admin.html" style="opacity: 0.8;"><i class="fas fa-lock"></i> Admin Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <img src="/logo.jpg" alt="EL ROI CARE TRUST Official Logo" class="trust-logo-img">
+        <div class="logo-text">
+          <h1>EL ROI CARE TRUST</h1>
+          <span>Care, Compassion and Humanity</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/about.html" class="nav-link">About Us</a></li>
+        <li><a href="/activities.html" class="nav-link">Our Activities</a></li>
+        <li><a href="/tax-benefits-80g.html" class="nav-link">80G Tax Exemption</a></li>
+        <li><a href="/donate.html" class="nav-link">Donate</a></li>
+        <li><a href="/gallery.html" class="nav-link active">Photo Gallery</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="/donate.html" class="btn btn-gold btn-sm"><i class="fas fa-heart"></i> Donate Now</a>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #07192f 0%, #0b2545 100%); color: #ffffff; padding: 65px 0 55px; text-align: center;">
+    <div class="container">
+      <span class="tag-badge" style="margin-bottom: 12px; display: inline-block;">AUTHENTIC SERVICE IN PICTURES</span>
+      <h1 style="color: #ffffff; font-size: 2.6rem; margin-bottom: 15px;">Trust Photo Gallery</h1>
+      <p style="color: #cbd5e1; max-width: 680px; margin: 0 auto; font-size: 1.1rem;">
+        Witness the smiles, the compassion, and the life-changing food provisions delivered on the ground by ELROI CARE TRUST.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section section-bg-soft">
+    <div class="container">
+      <!-- Gallery Toolbar: Header & Upload Button -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-subtle);">
+        <div>
+          <h2 style="font-size: 1.45rem; color: var(--primary-navy); margin-bottom: 4px;">
+            <i class="fas fa-camera-retro" style="color: var(--accent-gold);"></i> Field Charity Photographs
+          </h2>
+          <p style="font-size: 0.88rem; color: #64748b; margin: 0;">Authentic ground service, monthly grocery drives, and relief actions</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <a href="/admin.html" class="btn btn-outline btn-sm" style="display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-lock"></i> <strong>Admin Portal</strong>
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="gallery-filters">
+        <button type="button" class="filter-btn active" data-filter="all">All Photos</button>
+        <button type="button" class="filter-btn" data-filter="groceries"><i class="fas fa-shopping-basket"></i> Monthly Provisions</button>
+        <button type="button" class="filter-btn" data-filter="blind_disabled"><i class="fas fa-blind"></i> Blind & Differently Abled</button>
+        <button type="button" class="filter-btn" data-filter="children"><i class="fas fa-child"></i> Children Welfare</button>
+        <button type="button" class="filter-btn" data-filter="widows_seniors"><i class="fas fa-heart"></i> Widows & Seniors</button>
+        <button type="button" class="filter-btn" data-filter="tribal"><i class="fas fa-campground"></i> Tribal Settlements</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="galleryGrid">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
+          <i class="fas fa-spinner fa-spin" style="font-size: 2.5rem; color: var(--royal-blue); margin-bottom: 15px;"></i>
+          <p style="color: #64748b; font-weight: 600;">Loading verified charity photographs...</p>
+        </div>
+      </div>
+
+      <!-- Admin Upload Notice Banner -->
+      <div style="margin-top: 50px; background: #ffffff; border: 1px dashed var(--accent-gold); border-radius: 12px; padding: 25px; text-align: center;">
+        <h4 style="color: var(--royal-blue); margin-bottom: 8px;"><i class="fas fa-camera"></i> Are You the Trust Administrator?</h4>
+        <p style="font-size: 0.92rem; color: #64748b; max-width: 600px; margin: 0 auto 15px;">
+          You can easily upload new photos of charity events, grocery distributions, and beneficiary updates directly from your smartphone or computer.
+        </p>
+        <a href="/admin.html" class="btn btn-sm btn-outline"><i class="fas fa-upload"></i> Go to Admin Photo Uploader</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" title="Close"><i class="fas fa-times"></i></button>
+      
+      <div class="lightbox-img-box">
+        <img id="lightboxImg" src="" alt="Enlarged Photograph">
+      </div>
+
+      <div class="lightbox-info">
+        <div>
+          <h3 id="lightboxTitle">Activity Title</h3>
+          <p id="lightboxDesc">Activity description and impact notes.</p>
+          <small id="lightboxDate" style="color: var(--accent-gold-light);"><i class="fas fa-calendar-alt"></i> Date</small>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button id="lightboxPrev" class="btn btn-sm btn-outline-white" title="Previous"><i class="fas fa-chevron-left"></i></button>
+          <button id="lightboxNext" class="btn btn-sm btn-outline-white" title="Next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo-wrapper" style="margin-bottom: 18px;">
+            <img src="/logo.jpg" alt="EL ROI CARE TRUST Official Logo" class="trust-logo-img" style="width: 48px; height: 48px;">
+            <div class="logo-text">
+              <h1 style="color: #ffffff; font-size: 1.2rem;">EL ROI CARE TRUST</h1>
+              <span style="color: var(--accent-gold-light);">Care, Compassion and Humanity</span>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 18px;">
+            Dedicated to uplifting the poor, blind, physically and intellectually challenged, destitute widows, children, and tribal hamlets.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="/activities.html"><i class="fas fa-chevron-right"></i> Our Activities</a></li>
+            <li><a href="/tax-benefits-80g.html"><i class="fas fa-chevron-right"></i> 80G Tax Exemption</a></li>
+            <li><a href="/donate.html"><i class="fas fa-chevron-right"></i> Donate Now</a></li>
+            <li><a href="/gallery.html"><i class="fas fa-chevron-right"></i> Photo Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <div class="footer-contact-item">
+            <i class="fas fa-user-tie"></i>
+            <div><strong>P.K. Immanuel Neas Kumar</strong><br><small>Founder & Managing Trustee</small></div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div><a href="tel:7904947631" style="color:#fff; font-weight:700;">+91 7904947631</a></div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div><a href="mailto:contact@elroicaretrust.in" style="color:#fff;">contact@elroicaretrust.in</a></div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Office Address</h3>
+          <p style="font-size:0.9rem; color:#cbd5e1; line-height:1.6;">
+            No. 1, Venkatapuram Road 4, Katchur Medu, Uthukottai Taluk, Tiruvallur District, Tamil Nadu – 602026, India.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 ELROI CARE TRUST. All Rights Reserved.</div>
+        <div><a href="/donate.html">Donate</a> | <a href="/admin.html">Admin</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Actions -->
+  <div class="floating-actions">
+    <a href="https://wa.me/917904947631" class="fab fab-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="/donate.html" class="fab fab-donate"><i class="fas fa-heart"></i></a>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/gallery.js"></script>
+</body>
+</html>

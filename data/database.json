@@ -1,0 +1,143 @@
+{
+  "trust_info": {
+    "name": "ELROI CARE TRUST",
+    "legal_name": "EL-ROI TRUST",
+    "tagline": "Care, Compassion and Humanity",
+    "motto": "Bringing Hope, Dignity and Lifesaving Support to the Underprivileged",
+    "founder": "P.K. Immanuel Neas Kumar",
+    "founder_role": "Founder & Managing Trustee",
+    "founder_phone": "7904947631",
+    "whatsapp": "7904947631",
+    "email": "contact@elroicaretrust.in",
+    "secondary_email": "elroicaretrust@gmail.com",
+    "website": "www.elroicaretrust.in",
+    "office_address": "No. 1, Venkatapuram Road 4, Katchur Medu, Uthukottai Taluk, Tiruvallur District, Tamil Nadu – 602026, India",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "bank": {
+      "account_name": "MESSRS. EL-ROI TRUST",
+      "bank_name": "The Karur Vysya Bank Ltd. (KVB)",
+      "branch": "Seethanjeri Branch (Branch Code: 1743)",
+      "account_number": "1743115000001034",
+      "account_type": "Current Account (CA - Resident)",
+      "ifsc": "KVBL0001743",
+      "micr": "602053004",
+      "upi_id": "imman.pk80@okicici",
+      "upi_holder": "Immanuel Nesakumar Official",
+      "qr_image": "/elroi-upi-qr.jpg",
+      "upi_backup": "1743115000001034@kvb",
+      "upi_phone": "7904947631@upi"
+    },
+    "tax_exemption": {
+      "section_80g": "Eligible for 50% Tax Exemption under Section 80G of the Indian Income Tax Act",
+      "section_12a": "Registered under Section 12A of the Income Tax Act",
+      "urn_80g": "AAATE7316RE20221",
+      "pan": "AAATE7316R",
+      "form_10bd_compliance": "Form 10BD is filed annually. Donors receive eligible Form 10BE certificates reflecting directly in their Annual Information Statement (AIS) and 26AS."
+    },
+    "fcra_status": {
+      "international_policy": "Under the Foreign Contribution (Regulation) Act (FCRA), direct inward foreign currency contributions require FCRA clearance. Non-Resident Indians (NRIs) donating via Indian bank accounts (NRE/NRO/Domestic in INR) are fully eligible to donate.",
+      "guidance_contact": "contact@elroicaretrust.in"
+    }
+  },
+  "impact_metrics": {
+    "provisions_distributed": "5,400+ Kits",
+    "blind_disabled_assisted": "480+ Individuals",
+    "children_supported": "850+ Children",
+    "tribal_families_reached": "320+ Families",
+    "volunteers_active": "50+ Volunteers",
+    "years_of_service": "Dedicated On-ground Service"
+  },
+  "activities": [
+    {
+      "id": "grocery-provision",
+      "title": "Monthly Provision & Grocery Distribution",
+      "badge": "Core Lifeline Program",
+      "cover_image": "WhatsApp Image 2026-11-04 at 9.21.17 PM.jpeg",
+      "short_description": "Providing monthly ration kits including 25kg/10kg rice, pulses (toor & urad dal), cooking oil, wheat, and essential spices to destitute families who cannot afford two meals a day.",
+      "full_description": "For countless families living in severe poverty, hunger is a daily reality. ELROI CARE TRUST runs a sustained monthly grocery provision drive that reaches the doorsteps of elderly citizens, daily-wage laborers unable to find work, and impoverished households. Each provision kit contains balanced nutrition essentials to ensure no family goes to bed hungry.",
+      "beneficiaries": "Poor & economically disadvantaged families, daily wage earners",
+      "impact": "Over 5,400 monthly ration kits provided across Tiruvallur and surrounding districts."
+    },
+    {
+      "id": "blind-visually-impaired",
+      "title": "Empowerment & Aid for Blind and Visually Impaired",
+      "badge": "Special Focus",
+      "cover_image": "WhatsApp Image 2026-11-03 at 2.54.36 AM.jpeg",
+      "short_description": "Monthly ration kits, direct financial stipend, mobility cane support, and healthcare assistance for blind and visually impaired individuals.",
+      "full_description": "Visually impaired individuals face immense hurdles in securing livelihoods and sustaining themselves. ELROI CARE TRUST specifically identifies and adopts blind individuals and their families, providing them with dedicated monthly food kits, medical assistance, emergency cash support, and assistive tools so they can live with self-respect and dignity.",
+      "beneficiaries": "Blind, visually impaired, and low-vision individuals",
+      "impact": "120+ visually impaired persons supported with regular monthly care and sustenance."
+    },
+    {
+      "id": "differently-abled",
+      "title": "Care for Physically & Mentally Challenged Individuals",
+      "badge": "Compassion in Action",
+      "cover_image": "WhatsApp Image 2026-11-03 at 2.54.36 AM.jpeg",
+      "short_description": "Mobility aids, wheelchair support, hygienic provisions, and home-delivered nutrition for persons living with intellectual and physical disabilities.",
+      "full_description": "Persons living with severe physical or intellectual disabilities are often dependent on aging parents or have no support system. Our team conducts regular home visits, providing personal care packages, nutritious food provisions, wheelchair access facilitation, and emergency medical transport assistance.",
+      "beneficiaries": "Persons with physical disabilities, intellectual/developmental challenges",
+      "impact": "Over 360 physically and mentally challenged individuals regularly assisted."
+    },
+    {
+      "id": "widows-seniors",
+      "title": "Widow Welfare & Senior Citizen Dignity Care",
+      "badge": "Dignity & Respect",
+      "cover_image": "WhatsApp Image 2026-11-04 at 9.27.55 PM.jpeg",
+      "short_description": "Distributing new clothes, warm blankets, monthly groceries, and emotional companionship to elderly widows and abandoned senior citizens.",
+      "full_description": "Widows and abandoned senior citizens frequently face isolation, malnutrition, and destitution. ELROI CARE TRUST stands by them as their extended family, providing them with monthly ration packages, fresh sarees and dresses, bedding, and regular welfare check-ins.",
+      "beneficiaries": "Widows, elderly people without family support, deserted mothers",
+      "impact": "280+ elderly widows and senior citizens receive monthly care packages."
+    },
+    {
+      "id": "children-education",
+      "title": "Children Development, Education & Joyful Camps",
+      "badge": "Future Generation",
+      "cover_image": "WhatsApp Image 2026-11-04 at 9.34.43 PM.jpeg",
+      "short_description": "Evening study centers, school bags and notebook distribution, moral values, sports days, joyful children camps, and hot nutritious feasts.",
+      "full_description": "Every child has the right to dream, study, and smile. ELROI CARE TRUST organizes dynamic children's camps, weekend enrichment sessions, educational kit distributions (school bags, notebooks, geometry boxes, uniforms), and celebration meals for children from rural hamlets and slums.",
+      "beneficiaries": "Children from underprivileged, rural, and tribal backgrounds",
+      "impact": "Over 850 children enrolled in our programs with 100% staying in formal schooling."
+    },
+    {
+      "id": "tribal-rural",
+      "title": "Tribal & Nomadic Settlement Outreach",
+      "badge": "Reaching the Unreached",
+      "cover_image": "WhatsApp Image 2026-11-04 at 9.22.32 PM.jpeg",
+      "short_description": "Direct on-ground relief in remote tribal settlements and tent clusters: bulk rice, vegetables, drinking water relief, clothing, and health education.",
+      "full_description": "Nomadic and tribal communities residing in temporary tents often lack permanent ration cards, electricity, and clean drinking water. Our trust visits these remote settlements with vehicle loads of provisions, grains, fresh vegetables, clothing, and tarpaulins to protect their shelters.",
+      "beneficiaries": "Tribal settlements, nomadic communities, rural underprivileged hamlets",
+      "impact": "Direct relief provided to 25+ remote settlements and tribal tent clusters."
+    }
+  ],
+  "enquiries": [
+    {
+      "id": "ENQ-1001",
+      "name": "S. Rajesh Kumar",
+      "email": "rajesh.k@gmail.com",
+      "phone": "9841023456",
+      "subject": "Sponsoring Monthly Groceries for Blind Persons",
+      "message": "I would like to sponsor monthly grocery kits for 5 blind families in Tiruvallur. Kindly guide me on how to proceed.",
+      "date": "2026-11-04",
+      "status": "Responded"
+    }
+  ],
+  "donations": [
+    {
+      "id": "ECT-2026-0001",
+      "donor_name": "Arunachalam S",
+      "pan": "ABCDE1234F",
+      "email": "arun.s@outlook.com",
+      "phone": "9840112233",
+      "address": "Chennai, Tamil Nadu",
+      "amount": 5000,
+      "amount_words": "Rupees Five Thousand Only",
+      "payment_mode": "UPI Transfer",
+      "txn_ref": "4110607232042",
+      "date": "2026-11-02",
+      "cause": "Children Educational Feast & Provision Drive",
+      "receipt_status": "Issued"
+    }
+  ]
+}
+

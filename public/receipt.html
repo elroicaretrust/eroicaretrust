@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official 80G Tax Donation Receipt | ELROI CARE TRUST</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="background: #f1f5f9; padding: 30px 10px;">
+
+  <!-- Print / Action Bar -->
+  <div class="no-print" style="max-width: 800px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <a href="/" class="btn btn-outline btn-sm"><i class="fas fa-arrow-left"></i> Return to Homepage</a>
+    <div style="display: flex; gap: 10px;">
+      <button id="printReceiptBtn" class="btn btn-gold btn-sm"><i class="fas fa-print"></i> Print / Save as PDF</button>
+      <a href="/donate.html" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Donate Again</a>
+    </div>
+  </div>
+
+  <!-- Official Receipt Paper -->
+  <div class="receipt-paper">
+    <!-- Trust Header -->
+    <div class="receipt-header">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="/logo.jpg" alt="EL ROI CARE TRUST Official Logo" style="width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #b45309; background: #fff;">
+        <div class="receipt-trust-details">
+          <h2>ELROI CARE TRUST</h2>
+          <div style="color: #b45309; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px;">
+            Care, Compassion and Humanity
+          </div>
+          <p>
+            Registered Public Charitable Trust | Regd. No. IV-12/2022<br>
+            Section 80G & 12A Recognized | 50% Tax Exemption for Indian Donors<br>
+            No. 1, Venkatapuram Road 4, Katchur Medu, Uthukottai Taluk, Tiruvallur – 602026, Tamil Nadu<br>
+            Email: contact@elroicaretrust.in | Phone: +91 7904947631 | Web: www.elroicaretrust.in
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: right;">
+        <div class="receipt-title-box">DONATION RECEIPT</div>
+        <div style="font-size: 0.82rem; color: #4b5563; margin-top: 6px;">Under Section 80G</div>
+      </div>
+    </div>
+
+    <!-- Meta Details Grid -->
+    <div class="receipt-meta-grid">
+      <div>
+        <span style="color: #6b7280; font-size: 0.82rem; display: block;">Receipt Serial Number:</span>
+        <strong id="rReceiptNo" style="font-size: 1.15rem; color: #0b2545;">ECT-2026-0001</strong>
+      </div>
+      <div style="text-align: right;">
+        <span style="color: #6b7280; font-size: 0.82rem; display: block;">Date of Issue:</span>
+        <strong id="rDate" style="font-size: 1.05rem; color: #111827;">2026-11-05</strong>
+      </div>
+    </div>
+
+    <!-- Donor Information Table -->
+    <table class="receipt-table">
+      <tr>
+        <th style="width: 30%;">Received With Thanks From:</th>
+        <td style="width: 70%;"><strong id="rDonorName" style="font-size: 1.1rem; color: #0b2545;">Kind Donor</strong></td>
+      </tr>
+      <tr>
+        <th>Donor PAN (for 80G Benefit):</th>
+        <td><strong id="rDonorPan" style="letter-spacing: 1.5px; color: #1e3a8a;">ABCDE1234F</strong></td>
+      </tr>
+      <tr>
+        <th>Mobile / Phone:</th>
+        <td id="rDonorPhone">+91 7904947631</td>
+      </tr>
+      <tr>
+        <th>Email Address:</th>
+        <td id="rDonorEmail">donor@example.com</td>
+      </tr>
+      <tr>
+        <th>Postal Address:</th>
+        <td id="rDonorAddress">Tamil Nadu, India</td>
+      </tr>
+      <tr>
+        <th>Payment Mode & UTR / Ref:</th>
+        <td>
+          <span id="rPaymentMode">UPI Transfer</span> | 
+          Ref No: <strong id="rTxnRef" style="color: #374151;">4110607232042</strong>
+        </td>
+      </tr>
+      <tr>
+        <th>Specific Charitable Purpose:</th>
+        <td id="rCause">Monthly Grocery Provisions & Welfare for Blind and Widows</td>
+      </tr>
+      <tr style="background: #f8fafc;">
+        <th style="font-size: 1.05rem; color: #0b2545;">Total Amount Received:</th>
+        <td>
+          <div id="rAmountNum" style="font-size: 1.4rem; font-weight: 800; color: #0b2545;">₹ 5,000/-</div>
+          <div id="rAmountWords" style="font-size: 0.9rem; font-weight: 600; color: #4b5563; font-style: italic; margin-top: 2px;">
+            Rupees Five Thousand Only
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Statutory 80G Exemption Clause -->
+    <div class="receipt-tax-clause">
+      <strong><i class="fas fa-certificate"></i> Tax Exemption Declaration under Section 80G:</strong><br>
+      This is to certify that voluntary donation to <strong>ELROI CARE TRUST</strong> qualifies for 50% deduction from taxable income under Section 80G of the Indian Income Tax Act, 1961. This contribution is eligible for Form 10BD annual reporting, entitling the donor to claim tax deductions in their respective Annual Information Statement (AIS) and Income Tax Return.
+    </div>
+
+    <!-- Signatures & Seal -->
+    <div class="receipt-signatures">
+      <div style="font-size: 0.78rem; color: #6b7280; max-width: 320px;">
+        * This is an officially generated computer donation receipt backed by verified bank records. No physical signature is required under IT rules for digitally validated receipts.
+      </div>
+
+      <div class="receipt-sign-box">
+        <div style="margin-bottom: 8px;">
+          <div style="display: inline-block; border: 2px solid #b45309; border-radius: 50%; width: 65px; height: 65px; line-height: 60px; color: #b45309; font-size: 11px; font-weight: 800; text-transform: uppercase;">
+            SEAL
+          </div>
+        </div>
+        <div class="receipt-sign-line"></div>
+        <div style="font-weight: 800; color: #0b2545; font-size: 0.95rem;">P.K. Immanuel Neas Kumar</div>
+        <div style="font-size: 0.8rem; color: #4b5563;">Founder & Managing Trustee</div>
+        <div style="font-size: 0.75rem; color: #b45309; font-weight: 700;">ELROI CARE TRUST</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/receipt.js"></script>
+</body>
+</html>
+
