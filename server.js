@@ -13,6 +13,43 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+// Auto-load environment variables from .env.local and .env
+function autoLoadEnv() {
+  const envFiles = ['.env.local', '.env'];
+  for (const file of envFiles) {
+    const fullPath = path.join(__dirname, file);
+    try {
+      if (fs.existsSync(fullPath)) {
+        const content = fs.readFileSync(fullPath, 'utf8');
+        content.split(/\r?\n/).forEach(line => {
+          line = line.trim();
+          if (!line || line.startsWith('#')) return;
+          const eqIdx = line.indexOf('=');
+          if (eqIdx !== -1) {
+            const key = line.slice(0, eqIdx).trim();
+            let val = line.slice(eqIdx + 1).trim();
+            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+              val = val.slice(1, -1);
+            }
+            if (!process.env[key]) {
+              process.env[key] = val;
+            }
+          }
+        });
+      }
+    } catch (e) { }
+  }
+
+  // Automatically map TRUST_READ_WRITE_TOKEN or custom store tokens to standard BLOB_READ_WRITE_TOKEN
+  if (process.env.TRUST_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN) {
+    process.env.BLOB_READ_WRITE_TOKEN = process.env.TRUST_READ_WRITE_TOKEN;
+  }
+  if (process.env.TRUST_STORE_ID && !process.env.BLOB_STORE_ID) {
+    process.env.BLOB_STORE_ID = process.env.TRUST_STORE_ID;
+  }
+}
+autoLoadEnv();
+
 // Official Vercel Blob SDK
 let vercelBlob = null;
 try {
@@ -125,7 +162,11 @@ function readSettings() {
       return inMemorySettings;
     }
   } catch (e) { }
-  inMemorySettings = { storage_mode: 'auto', vercel_blob_token: process.env.BLOB_READ_WRITE_TOKEN || '' };
+  inMemorySettings = {
+    storage_mode: 'auto',
+    vercel_blob_token: process.env.BLOB_READ_WRITE_TOKEN || process.env.TRUST_READ_WRITE_TOKEN || '',
+    store_id: process.env.BLOB_STORE_ID || process.env.TRUST_STORE_ID || ''
+  };
   return inMemorySettings;
 }
 
@@ -147,11 +188,25 @@ function saveSettings(settings) {
 
 // Helper: Get Active Vercel Blob Token
 function getActiveVercelToken() {
-  const envToken = process.env.BLOB_READ_WRITE_TOKEN;
-  if (envToken && envToken.trim().length > 0) return envToken.trim();
+  const envToken = process.env.BLOB_READ_WRITE_TOKEN || process.env.TRUST_READ_WRITE_TOKEN;
+  if (envToken && envToken.trim().length > 0) {
+    const token = envToken.trim();
+    if (!process.env.BLOB_READ_WRITE_TOKEN) process.env.BLOB_READ_WRITE_TOKEN = token;
+    return token;
+  }
+  // Check any other *_READ_WRITE_TOKEN from Vercel store attachments
+  for (const key of Object.keys(process.env)) {
+    if (key.endsWith('_READ_WRITE_TOKEN') && process.env[key] && process.env[key].trim().length > 0) {
+      const token = process.env[key].trim();
+      process.env.BLOB_READ_WRITE_TOKEN = token;
+      return token;
+    }
+  }
   const settings = readSettings();
   if (settings && settings.vercel_blob_token && settings.vercel_blob_token.trim().length > 0) {
-    return settings.vercel_blob_token.trim();
+    const token = settings.vercel_blob_token.trim();
+    process.env.BLOB_READ_WRITE_TOKEN = token;
+    return token;
   }
   return '';
 }
@@ -598,7 +653,7 @@ const server = http.createServer(async (req, res) => {
 
   // GET /api/photos
   if (pathname === '/api/photos' && method === 'GET') {
-    if (IS_VERCEL && getActiveVercelToken()) {
+    if (getActiveVercelToken()) {
       syncVercelBlobPhotos().catch(() => {});
     }
     const allItems = getGalleryItems();
@@ -840,11 +895,14 @@ const server = http.createServer(async (req, res) => {
   // GET /api/storage/status
   if (pathname === '/api/storage/status' && method === 'GET') {
     const token = getActiveVercelToken();
+    const settings = readSettings();
+    const storeId = process.env.BLOB_STORE_ID || process.env.TRUST_STORE_ID || settings.store_id || null;
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify({
       configured: !!token,
       engine: token ? 'vercel_blob' : 'local',
       target: token ? 'Vercel Blob Cloud CDN (Active)' : 'Local Disk (Vercel Ready)',
+      store_id: storeId,
       message: token
         ? 'Connected to Vercel Blob Storage. All new photos are hosted on Vercel CDN.'
         : 'Running on local server storage. To store photos in Vercel Blob in the future, connect your Vercel project or set BLOB_READ_WRITE_TOKEN.',
@@ -1143,13 +1201,19 @@ const server = http.createServer(async (req, res) => {
 
 if (require.main === module) {
   server.listen(PORT, () => {
+    const token = getActiveVercelToken();
+    const storeId = process.env.BLOB_STORE_ID || process.env.TRUST_STORE_ID;
     console.log(`====================================================`);
     console.log(` ELROI CARE TRUST - Production Web Server Running `);
     console.log(` Care, Compassion and Humanity `);
     console.log(` URL: http://localhost:${PORT}`);
+    console.log(` Storage: ${token ? `Vercel Blob Storage [Active] (Store: ${storeId || 'Connected'})` : 'Local Disk Storage'}`);
     console.log(` Official Domain: www.elroicaretrust.in`);
     console.log(` Founder: P.K. Immanuel Neas Kumar (7904947631)`);
     console.log(`====================================================`);
+    if (token) {
+      syncVercelBlobPhotos().catch(() => {});
+    }
   });
 }
 
